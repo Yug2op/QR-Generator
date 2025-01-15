@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <style>
+        /* General styles for the webpage */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #313131;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Center the content */
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #545353;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-section {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: block;
+            color: #151515;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #878787;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Section to display the QR code */
+        .qr-section {
+            margin-top: 20px;
+        }
+
+        #qrCodeContainer {
+            display: inline-block;
+            margin-top: 20px;
+            
+        }
+
+        .error {
+            animation: shake .1s 10 linear;
+            border-color: #cc0033;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translate(0);
+            }
+
+            25% {
+                transform: translate(-2px);
+            }
+
+            50% {
+                transform: translate(0);
+            }
+
+            75% {
+                transform: translate(2px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        .error input[type=text] {
+            border: 2px solid #cc0033;
+            outline: none;
+        }
+
+        /* from here */
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>QR Code Generator</h1>
+        <div class="input-section">
+            <label for="urlInput">Enter URL:</label>
+            <input type="text" id="urlInput" placeholder="Enter your link here" />
+            <button id="generateBtn">Generate QR</button>
+        </div>
+        <div class="qr-section">
+            <div id="qrCodeContainer">
+                <img src="" id="qrImage" alt="">
+                <p id="qrText"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let qrImage = document.getElementById('qrImage')
+        let urlInpue = document.getElementById('urlInput')
+        let qrText = document.getElementById('qrText')
+
+        function generateQR() {
+            if (urlInpue.value.length > 0) {
+                qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + urlInpue.value;
+                qrText.innerHTML = ""
+            }
+            else {
+                qrText.innerHTML = "!!Enter Some URL!!"
+                qrText.style.color = "red";
+                qrText.style.fontSize = "25px";
+                urlInput.style.borderColor = "red";
+                urlInput.classList.add('error');
+                setTimeout(() => {
+                    urlInput.classList.remove('error');
+
+                }, 1000)
+            }
+
+        }
+        document.getElementById('generateBtn').addEventListener('click', () => {
+            generateQR();
+        })
+
+    </script>
+</body>
+
+</html>
