@@ -22,4 +22,4 @@ A simple and responsive QR Code Generator built with **HTML**, **CSS**, and **Ja
 ## 📖 How to Use
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-Yug2oo/QR-Generator.git
+   git clone https://github.com/your-Yug2op/QR-Generator.git
